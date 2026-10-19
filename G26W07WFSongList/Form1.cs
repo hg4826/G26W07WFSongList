@@ -44,6 +44,13 @@ namespace G26W07WFSongList
                 _db.SaveChanges();
             }
 
+            LoadSongs();
+        }
+
+        private void LoadSongs()
+        {
+            listSong.Items.Clear();
+
             var filteredSongs = _db.Songs
                 .Where(s => s.Rating >= 4)
                 .OrderByDescending(s => s.Rating);
@@ -52,6 +59,28 @@ namespace G26W07WFSongList
             {
                 listSong.Items.Add(song);
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string title = txtTitle.Text.Trim();
+            string artist = txtArtist.Text.Trim();
+
+            if (title.Length == 0 || artist.Length == 0)
+            {
+                MessageBox.Show("제목과 가수를 입력하세요.");
+                return;
+            }
+
+            _db.Songs.Add(new Song(title, artist, (int)numRating.Value));
+            _db.SaveChanges();
+
+            txtTitle.Clear();
+            txtArtist.Clear();
+            numRating.Value = numRating.Maximum;
+            txtTitle.Focus();
+
+            LoadSongs();
         }
     }
 
