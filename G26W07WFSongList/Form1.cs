@@ -82,6 +82,31 @@ namespace G26W07WFSongList
 
             LoadSongs();
         }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (listSong.SelectedItem is not Song song)
+            {
+                MessageBox.Show("삭제할 노래를 선택하세요.");
+                return;
+            }
+
+            if (MessageBox.Show($"'{song.Title}' 을(를) 삭제할까요?", "삭제 확인",
+                    MessageBoxButtons.YesNo) != DialogResult.Yes)
+            {
+                return;
+            }
+
+            _db.Songs.Remove(song);
+            _db.SaveChanges();
+
+            LoadSongs();
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public record Song(string Title, string Artist, int Rating)
