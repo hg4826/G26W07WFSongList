@@ -37,6 +37,7 @@
             numRating = new NumericUpDown();
             btnAdd = new Button();
             btnDelete = new Button();
+            btnKaraoke = new Button();
             ((System.ComponentModel.ISupportInitialize)numRating).BeginInit();
             SuspendLayout();
             // 
@@ -119,12 +120,23 @@
             btnDelete.Text = "➖ 삭제";
             btnDelete.UseVisualStyleBackColor = true;
             btnDelete.Click += btnDelete_Click;
+            //
+            // btnKaraoke
+            //
+            btnKaraoke.Location = new Point(760, 680);
+            btnKaraoke.Name = "btnKaraoke";
+            btnKaraoke.Size = new Size(240, 50);
+            btnKaraoke.TabIndex = 9;
+            btnKaraoke.Text = "🎵 YouTube 노래방";
+            btnKaraoke.UseVisualStyleBackColor = true;
+            btnKaraoke.Click += btnKaraoke_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(14F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1118, 831);
+            Controls.Add(btnKaraoke);
             Controls.Add(btnDelete);
             Controls.Add(btnAdd);
             Controls.Add(numRating);
@@ -152,5 +164,6 @@
         private NumericUpDown numRating;
         private Button btnAdd;
         private Button btnDelete;
+        private Button btnKaraoke;
     }
 }

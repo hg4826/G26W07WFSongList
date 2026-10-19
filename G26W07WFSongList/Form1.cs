@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.ComponentModel.DataAnnotations;
 
 namespace G26W07WFSongList
@@ -101,6 +102,23 @@ namespace G26W07WFSongList
             _db.SaveChanges();
 
             LoadSongs();
+        }
+
+        private void btnKaraoke_Click(object sender, EventArgs e)
+        {
+            if (listSong.SelectedItem is not Song song)
+            {
+                MessageBox.Show("노래를 선택하세요.");
+                return;
+            }
+
+            // 선택한 곡의 "제목 가수 노래방" 으로 YouTube 검색 결과를 기본 브라우저에서 연다
+            string query = Uri.EscapeDataString($"{song.Title} {song.Artist} 노래방");
+            Process.Start(new ProcessStartInfo(
+                $"https://www.youtube.com/results?search_query={query}")
+            {
+                UseShellExecute = true
+            });
         }
 
         private void txtTitle_TextChanged(object sender, EventArgs e)
